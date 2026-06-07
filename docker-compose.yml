@@ -1,0 +1,55 @@
+# ===========================================
+# Docker Compose Configuration
+# Secure Smart Agriculture Demo
+# ===========================================
+
+services:
+
+  # MQTT Broker - Mosquitto
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt_broker
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    restart: unless-stopped
+
+  # Node-RED - Automation Engine
+  nodered:
+    image: nodered/node-red:latest
+    container_name: node_red
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+      - ./node-red/flows.json:/data/flows.json
+    depends_on:
+      - mosquitto
+    restart: unless-stopped
+
+  # Grafana - Visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=AgriSecure2026
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - mosquitto
+    restart: unless-stopped
+
+# Named volumes for data persistence
+volumes:
+  mosquitto_data:
+  mosquitto_logs:
+  nodered_data:
+  grafana_data:
