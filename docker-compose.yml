@@ -28,6 +28,24 @@ services:
       - ./node-red/flows.json:/data/flows.json
     depends_on:
       - mosquitto
+      - influxdb
+    restart: unless-stopped
+
+  # InfluxDB - Time Series Database
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=AgriSecure2026
+      - DOCKER_INFLUXDB_INIT_ORG=AgriSecure
+      - DOCKER_INFLUXDB_INIT_BUCKET=agriculture
+      - DOCKER_INFLUXDB_INIT_RETENTION=1w
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
     restart: unless-stopped
 
   # Grafana - Visualization
@@ -44,7 +62,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
     depends_on:
-      - mosquitto
+      - influxdb
     restart: unless-stopped
 
 # Named volumes for data persistence
@@ -52,4 +70,5 @@ volumes:
   mosquitto_data:
   mosquitto_logs:
   nodered_data:
+  influxdb_data:
   grafana_data:
