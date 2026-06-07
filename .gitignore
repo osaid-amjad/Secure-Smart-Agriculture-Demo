@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables
+.env
+
+# Certificates (will be generated locally)
+mqtt/certs/*.key
+mqtt/certs/*.crt
+
