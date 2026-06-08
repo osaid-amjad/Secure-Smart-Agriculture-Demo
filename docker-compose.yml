@@ -25,7 +25,6 @@ services:
       - "1880:1880"
     volumes:
       - nodered_data:/data
-      - ./node-red/flows.json:/data/flows.json
     depends_on:
       - mosquitto
       - influxdb
