@@ -13,3 +13,8 @@ __pycache__/
 mqtt/certs/*.key
 mqtt/certs/*.crt
 
+# MQTT Security
+mqtt/passwd
+mqtt/*.conf~
+mqtt/certs/*.csr
+mqtt/certs/*.srl
