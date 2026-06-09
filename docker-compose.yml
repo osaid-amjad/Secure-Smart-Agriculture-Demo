@@ -10,9 +10,11 @@ services:
     image: eclipse-mosquitto:2.0
     container_name: mqtt_broker
     ports:
-      - "1883:1883"
+      - "8883:8883"
     volumes:
       - ./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mqtt/certs:/mosquitto/config/certs
+      - ./mqtt/passwd:/mosquitto/config/passwd
       - mosquitto_data:/mosquitto/data
       - mosquitto_logs:/mosquitto/log
     restart: unless-stopped
@@ -25,6 +27,7 @@ services:
       - "1880:1880"
     volumes:
       - nodered_data:/data
+      - ./mqtt/certs/ca.crt:/certs/ca.crt
     depends_on:
       - mosquitto
       - influxdb
