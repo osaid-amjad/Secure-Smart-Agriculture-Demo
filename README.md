@@ -159,6 +159,27 @@ Each sensor will confirm a secure TLS connection:
 
 ---
 
+## ⚙️ Post-Setup Configuration
+
+### Node-RED MQTT TLS Configuration
+
+After starting the stack for the first time, you need to manually upload the CA certificate to Node-RED so it can connect to the MQTT broker securely:
+
+1. Open Node-RED at `http://localhost:1880`
+2. Double-click the **"All Agriculture Sensors"** MQTT node
+3. Click the **pencil icon** next to **"Mosquitto Broker"**
+4. Click the **pencil icon** next to **"AgriSecure TLS"**
+5. Scroll down to **CA Certificate**
+6. Remove the existing certificate if present
+7. Click **Upload** and navigate to `mqtt/certs/ca.crt`
+8. Click **Update** → **Update** → **Done** → **Deploy** (top right)
+
+The MQTT node should now show **"connected"** underneath it! ✅
+
+> **Why is this needed?** The CA certificate is stored internally in Node-RED and cannot be version controlled. Every fresh installation requires uploading the locally generated certificate.
+
+---
+
 ## 🌐 Service Interfaces
 
 | Service | URL | Default Credentials |
