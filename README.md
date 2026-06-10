@@ -51,6 +51,7 @@ Grafana (Live Dashboard)
 
 ## 📁 Project Structure
 
+```text
 Secure-Smart-Agriculture-Demo/
 ├── docs/
 │   └── architecture.md         # Detailed architecture documentation
@@ -74,6 +75,7 @@ Secure-Smart-Agriculture-Demo/
 ├── README.md                   # Project documentation
 ├── requirements.txt            # Python dependencies
 └── SECURITY.md                 # Security policy and recommendations
+```
 ---
 
 ## 🚀 Getting Started
