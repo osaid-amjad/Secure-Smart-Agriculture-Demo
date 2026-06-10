@@ -55,7 +55,8 @@ Secure-Smart-Agriculture-Demo/
 ├── docs/
 │   └── architecture.md         # Detailed architecture documentation
 ├── grafana/
-│   └── dashboards/             # Grafana dashboard configs
+│   └── dashboards/
+│       └── dashboard.json      # Grafana dashboard export
 ├── mqtt/
 │   ├── certs/
 │   │   ├── ca.crt              # Certificate Authority (generated locally)
@@ -70,8 +71,9 @@ Secure-Smart-Agriculture-Demo/
 │   └── sensor_temperature.py   # Temperature simulator
 ├── docker-compose.yml          # Docker services configuration
 ├── LICENSE                     # MIT Licence
-└── README.md                   # Project documentation
-
+├── README.md                   # Project documentation
+├── requirements.txt            # Python dependencies
+└── SECURITY.md                 # Security policy and recommendations
 ---
 
 ## 🚀 Getting Started
@@ -131,8 +133,10 @@ docker compose ps
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install paho-mqtt
+pip install -r requirements.txt
 ```
+
+This installs all required Python dependencies automatically from `requirements.txt`.
 
 ### 6. Run the Sensors
 
