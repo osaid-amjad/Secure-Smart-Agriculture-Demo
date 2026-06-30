@@ -7,62 +7,6 @@
         "info": ""
     },
     {
-        "id": "6e3d86355c23fcb9",
-        "type": "mqtt-broker",
-        "name": "Mosquitto Broker",
-        "broker": "mosquitto",
-        "port": 1883,
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": 4,
-        "keepalive": 60,
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "f7888138e2435706",
-        "type": "influxdb",
-        "hostname": "127.0.0.1",
-        "port": 8086,
-        "protocol": "http",
-        "database": "database",
-        "name": "Write to InfluxDB",
-        "usetls": false,
-        "tls": "",
-        "influxdbVersion": "2.0",
-        "url": "http://influxdb:8086",
-        "timeout": 10,
-        "rejectUnauthorized": false
-    },
-    {
-        "id": "3cc11d24.ff01a2",
-        "type": "comment",
-        "z": "f6f2187d.f17ca8",
-        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
-        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
-        "x": 350,
-        "y": 80,
-        "wires": []
-    },
-    {
         "id": "1b472bc749c02172",
         "type": "mqtt in",
         "z": "f6f2187d.f17ca8",
@@ -116,7 +60,7 @@
         "retentionPolicyV18Flux": "",
         "org": "AgriSecure",
         "bucket": "agriculture",
-        "x": 630,
+        "x": 650,
         "y": 260,
         "wires": []
     },
@@ -138,10 +82,11 @@
         "repair": false,
         "outputs": 1,
         "x": 620,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
-                "39e906732970f44c"
+                "39e906732970f44c",
+                "3aba9cdf92cc43c9"
             ]
         ]
     },
@@ -165,7 +110,7 @@
         "to": "",
         "reg": false,
         "x": 810,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "1695919e50f3dcad"
@@ -186,7 +131,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 980,
-        "y": 220,
+        "y": 180,
         "wires": []
     },
     {
@@ -210,7 +155,8 @@
         "y": 300,
         "wires": [
             [
-                "7c3e5051683a7c52"
+                "7c3e5051683a7c52",
+                "6992eb12c7d97495"
             ]
         ]
     },
@@ -232,10 +178,11 @@
         "repair": false,
         "outputs": 1,
         "x": 580,
-        "y": 340,
+        "y": 380,
         "wires": [
             [
-                "e8c9dfc4f8836dc8"
+                "e8c9dfc4f8836dc8",
+                "3e3757242fc1468a"
             ]
         ]
     },
@@ -258,7 +205,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 820,
+        "x": 860,
         "y": 300,
         "wires": [
             [
@@ -285,8 +232,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 790,
-        "y": 340,
+        "x": 810,
+        "y": 380,
         "wires": [
             [
                 "68926366638e826c"
@@ -306,8 +253,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 960,
-        "y": 300,
+        "x": 1040,
+        "y": 280,
         "wires": []
     },
     {
@@ -322,12 +269,154 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 980,
-        "y": 340,
+        "x": 1020,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "d3af982a0606f093",
+        "id": "3aba9cdf92cc43c9",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "Irrigation System",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "💦 Irrigation Systems activate",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 140,
+        "wires": [
+            [
+                "1695919e50f3dcad"
+            ]
+        ]
+    },
+    {
+        "id": "6992eb12c7d97495",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "AC Units",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "💨 Air Conditioning activated",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 260,
+        "wires": [
+            [
+                "6782a7364a85f8da"
+            ]
+        ]
+    },
+    {
+        "id": "3e3757242fc1468a",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "humidifiers and dehumidifiers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Humidity regulatory systems activated",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 420,
+        "wires": [
+            [
+                "68926366638e826c"
+            ]
+        ]
+    },
+    {
+        "id": "6e3d86355c23fcb9",
+        "type": "mqtt-broker",
+        "name": "Mosquitto Broker",
+        "broker": "mosquitto",
+        "port": "8883",
+        "tls": "caafa9d1a75862f7",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f7888138e2435706",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "Write to InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "timeout": 10,
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "caafa9d1a75862f7",
+        "type": "tls-config",
+        "name": "AgriSecure TLS",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "ca.crt",
+        "servername": "localhost",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "8c81a208d6e485f4",
         "type": "global-config",
         "env": [],
         "modules": {
