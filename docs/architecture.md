@@ -173,7 +173,7 @@ All services run inside a Docker bridge network (`secure-smart-agriculture-demo_
 │ TLS 8883
 │
 ┌───────┴──────────────────────────────────────────┐
-│              Kali Linux Host                      │
+│              Linux Host                          │
 │   sensor_soil_moisture.py                        │
 │   sensor_temperature.py                          │
 │   sensor_humidity.py                             │
