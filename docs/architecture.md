@@ -11,6 +11,7 @@
 
 This project implements a secure end-to-end IoT pipeline for agricultural monitoring. The architecture follows a layered design where each component has a specific role, and security controls are applied at every layer.
 
+```text
 ┌─────────────────────────────────────────────┐
 │           FIELD LAYER                        │
 │   🌱 Soil Moisture  🌡️ Temperature  💧 Humidity │
@@ -43,6 +44,7 @@ This project implements a secure end-to-end IoT pipeline for agricultural monito
 │              Grafana                         │
 │     Real-Time Dashboard & Monitoring         │
 └─────────────────────────────────────────────┘
+```
 
 ---
 
@@ -153,6 +155,7 @@ Grafana connects to InfluxDB using the Flux query language and displays four pan
 
 All services run inside a Docker bridge network (`secure-smart-agriculture-demo_default`). Container-to-container communication uses Docker DNS resolution — containers reference each other by name (e.g., `mosquitto`, `influxdb`, `grafana`).
 
+```text
 ┌─────────────────────────────────────────────────┐
 │           Docker Bridge Network                  │
 │                                                  │
@@ -175,6 +178,7 @@ All services run inside a Docker bridge network (`secure-smart-agriculture-demo_
 │   sensor_temperature.py                          │
 │   sensor_humidity.py                             │
 └──────────────────────────────────────────────────┘
+```
 
 ---
 
